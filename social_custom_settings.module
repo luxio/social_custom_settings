@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @file
+ * Contains social_custom_settings.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function social_custom_settings_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the social_custom_settings module.
+    case 'help.page.social_custom_settings':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('My custom settings / modifications for Open Social') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function social_custom_settings_element_info_alter(array &$info) {
+  if (isset($info['text_format']['#process'])) {
+    $info['text_format']['#process'][] = 'social_custom_settings_filter_process_format';
+  }
+}
+
+/**
+* Readd ability of selecting format
+ */
+function social_custom_settings_filter_process_format($element) {
+  if (isset($element['format']['format']['#options']['full_html'])) {
+    $element['format']['format']['#options'] = [
+      'advanced_editor' => 'Advanced Editor',
+      'full_html' => 'Full HTML',
+      'basic_html' => 'Basic HTML',
+      ];
+    $element['format']['format']['#access'] = TRUE;
+  }
+
+  return $element;
+}

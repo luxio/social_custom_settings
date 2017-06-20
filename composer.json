@@ -1,0 +1,14 @@
+{
+  "name": "drupal/social_custom_settings",
+  "type": "drupal-module",
+  "description": "My custom settings / modifications for Open Social",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/social_custom_settings",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/social_custom_settings",
+    "source": "http://cgit.drupalcode.org/social_custom_settings"
+  },
+  "require": { }
+}
