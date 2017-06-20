@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\filter\Entity\FilterFormat;
 
 /**
  * Implements hook_help().
