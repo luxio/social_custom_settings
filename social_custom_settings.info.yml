@@ -1,5 +1,5 @@
 name: Open Social Custom Settings
 type: module
-description: My custom settings / modifications for Open Social
+description: My custom settings and modifications for Open Social
 core: 8.x
 package: Custom
