@@ -36,13 +36,24 @@ function social_custom_settings_element_info_alter(array &$info) {
 * Readd ability of selecting format
  */
 function social_custom_settings_filter_process_format($element) {
-  if (isset($element['format']['format']['#options']['full_html'])) {
-    $element['format']['format']['#options'] = [
-      'advanced_editor' => 'Advanced Editor',
-      'full_html' => 'Full HTML',
-      'basic_html' => 'Basic HTML',
-      ];
+
+  // Only fields listed here will have text format settings disabled
+  $full_html_field_ids = [
+    'edit-body-0',
+    'edit-field-profile-self-introduction-0',
+    'edit-field-group-description-0'
+  ];
+
+  $full_html = FilterFormat::load('advanced_editor');
+  $permission_name = $full_html->getPermissionName();
+  $account = \Drupal::currentUser();
+
+  if ($element['#type'] == 'text_format' && $account->hasPermission($permission_name) && in_array($element['#id'], $full_html_field_ids)) {
+    $element['#format'] = 'advanced_editor';
     $element['format']['format']['#access'] = TRUE;
+    $element['format']['format']['#value'] = 'advanced_editor';
+    $element['format']['help']['#access'] = FALSE;
+    $element['format']['format']['#options'] = ['advanced_editor' => 'Advanced Editor'];
   }
 
   return $element;
